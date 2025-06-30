@@ -564,30 +564,36 @@ export default function FrontendPortfolio() {
                     <h3 className="text-2xl font-bold text-white mb-4">Personal Projects</h3>
                     <div className="space-y-4">
                       <div className="p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300">
-                        <h4 className="text-lg font-semibold text-purple-400 mb-2">Task Management App</h4>
+                        <h4 className="text-lg font-semibold text-purple-400 mb-2">Student Attendance Management</h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Personal productivity app with drag-and-drop functionality, priority levels, and deadline
-                          tracking.
+                          Complete attendance tracking system for educational institutions with student registration,
+                          daily attendance marking, reports generation, and admin dashboard.
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">React</span>
-                          <span className="text-xs px-2 py-1 bg-pink-500/20 text-pink-300 rounded-full">DnD Kit</span>
+                          <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">PHP</span>
+                          <span className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full">Bootstrap</span>
+                          <span className="text-xs px-2 py-1 bg-green-500/20 text-green-300 rounded-full">MySQL</span>
                         </div>
                       </div>
 
                       <div className="p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300">
-                        <h4 className="text-lg font-semibold text-pink-400 mb-2">Weather Dashboard</h4>
+                        <h4 className="text-lg font-semibold text-pink-400 mb-2">Online Grocery Store</h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Clean weather app with location search, 7-day forecast, and weather alerts using OpenWeather
-                          API.
+                          Full-featured e-commerce platform for grocery shopping with product catalog, shopping cart,
+                          order management, and payment integration.
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          <span className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full">
-                            JavaScript
+                          <span className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full">.NET</span>
+                          <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">
+                            Bootstrap
                           </span>
-                          <span className="text-xs px-2 py-1 bg-yellow-500/20 text-yellow-300 rounded-full">API</span>
+                          <span className="text-xs px-2 py-1 bg-orange-500/20 text-orange-300 rounded-full">
+                            SQL Server
+                          </span>
                         </div>
                       </div>
+
+                 
 
                       <div className="p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300">
                         <h4 className="text-lg font-semibold text-purple-300 mb-2">Portfolio Website</h4>
@@ -602,6 +608,7 @@ export default function FrontendPortfolio() {
                     </div>
                   </div>
                 </div>
+
 
                 {/* Learning Projects */}
                 <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-xl rounded-3xl p-8 border border-green-500/20 relative overflow-hidden">
