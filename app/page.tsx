@@ -99,7 +99,7 @@ export default function FrontendPortfolio() {
   ]
   const downloadResume = () => {
     const link = document.createElement("a")
-    link.href = "/Dharmishtha.pdf"
+    link.href = "/DharmishthaResume"
     link.download = "Dharmishtha.pdf" // Replace with your actual name
     document.body.appendChild(link)
     link.click()
