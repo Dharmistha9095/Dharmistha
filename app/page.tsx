@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import {
   Menu,
   X,
@@ -24,7 +24,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-
+import emailjs from "emailjs-com";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function FrontendPortfolio() {
   const [activeSection, setActiveSection] = useState("home")
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -52,7 +55,29 @@ export default function FrontendPortfolio() {
 
     return () => clearInterval(timer)
   }, [currentRole])
+const form = useRef<any>(null);
+  const sendEmail = (e:any) => {
+    debugger
+    e.preventDefault();
 
+    emailjs
+      .sendForm(
+        "service_nzsjhkz",      // Replace with your ID
+        "template_dajgv4g",     // Replace with your template
+        form.current,
+        "7jMSReY0I9a23lCLH"       // Replace with your public key
+      )
+      .then(
+      (result) => {
+        console.log(result.text);
+        toast.success("Message sent successfully!");
+      },
+      (error) => {
+        console.log(error.text);
+        toast.error("Failed to send message. Try again.");
+      }
+    );
+  };
   const sections = [
     { id: "home", label: "Home", icon: "🏠" },
     { id: "about", label: "About", icon: "👨‍💻" },
@@ -72,8 +97,16 @@ export default function FrontendPortfolio() {
     { name: "Responsive Design", level: 85, color: "from-purple-500 to-indigo-500" },
     { name: "Git/GitHub", level: 80, color: "from-gray-500 to-slate-500" },
   ]
-
+const downloadResume = () => {
+  const link = document.createElement("a")
+  link.href = "/Dharmishtha.pdf"
+  link.download = "Dharmishtha.pdf" // Replace with your actual name
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
   return (
+    
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
       {/* Mobile Menu Button */}
       <button
@@ -99,19 +132,19 @@ export default function FrontendPortfolio() {
             <p className="text-sm text-blue-400 font-medium">Frontend Developer</p>
             <div className="flex justify-center space-x-3 mt-4">
               <a
-                href="#"
+                href="https://github.com/Dharmistha9095"
                 className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
               >
                 <Github className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/dharmistha1726/"
                 className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="mailto:tdharmistha1417@gmail.com"
                 className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
               >
                 <Mail className="w-4 h-4" />
@@ -139,9 +172,12 @@ export default function FrontendPortfolio() {
             ))}
           </div>
 
-          {/* Download CV Button */}
+            {/* Download CV Button */}
           <div className="mt-12">
-            <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0">
+            <Button
+              onClick={downloadResume}
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600  text-white border-0"
+             >
               <Download className="w-4 h-4 mr-2" />
               Download Resume
             </Button>
@@ -238,8 +274,8 @@ export default function FrontendPortfolio() {
                         </div>
 
                         <div className="space-y-4">
-                          <div className="text-5xl font-bold text-white">10</div>
-                          <div className="text-emerald-400 font-medium text-lg">Months Experience</div>
+                          <div className="text-5xl font-bold text-white">1</div>
+                          <div className="text-emerald-400 font-medium text-lg">Year Experience</div>
                           <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-cyan-500 rounded-full mx-auto"></div>
                         </div>
 
@@ -276,7 +312,7 @@ export default function FrontendPortfolio() {
                       </h3>
                       <p className="text-lg text-gray-300 leading-relaxed mb-4">
                         Hey there! I'm a dedicated frontend developer currently working in the tech industry.
-                        Over the past 10 months, I've been growing professionally while contributing to meaningful projects at my current company.
+                        Over the past 1 Year, I've been growing professionally while contributing to meaningful projects at my current company.
                       </p>
                       <p className="text-lg text-gray-300 leading-relaxed">
                         I specialize in React and Next.js, collaborating with cross-functional teams to deliver high-quality web applications.
@@ -593,7 +629,7 @@ export default function FrontendPortfolio() {
                         </div>
                       </div>
 
-                 
+
 
                       <div className="p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300">
                         <h4 className="text-lg font-semibold text-purple-300 mb-2">Portfolio Website</h4>
@@ -727,6 +763,7 @@ export default function FrontendPortfolio() {
             </div>
           </section>
         )}
+
         {/* Experience Section */}
         {activeSection === "experience" && (
           <section className="min-h-screen p-8 flex items-center">
@@ -740,27 +777,30 @@ export default function FrontendPortfolio() {
                   <CardHeader>
                     <div className="flex justify-between items-start">
                       <div>
-                        <CardTitle className="text-xl mb-2">Senior Frontend Developer</CardTitle>
-                        <CardDescription className="text-blue-400 font-medium">TechCorp Solutions</CardDescription>
+                        <CardTitle className="text-xl mb-2">React Developer</CardTitle>
+                        <CardDescription className="text-blue-400 font-medium">Orionik Technology</CardDescription>
                       </div>
                       <Badge variant="outline" className="border-white/20 text-white">
-                        2022 - Present
+                        Present
                       </Badge>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-gray-300 mb-4">
-                      <li>• Led frontend development for 5+ React applications serving 50k+ users</li>
-                      <li>• Improved application performance by 45% through code optimization and lazy loading</li>
-                      <li>• Implemented responsive design patterns reducing mobile bounce rate by 30%</li>
-                      <li>• Mentored 3 junior developers and established frontend coding standards</li>
-                      <li>• Collaborated with UX team to implement pixel-perfect designs</li>
+                      <li>• Developed 25+ salon management systems with comprehensive features</li>
+                      <li>• Built appointment booking, check-in systems, and staff leave management modules</li>
+                      <li>• Implemented subscription plans and multi-salon data management solutions</li>
+                      <li>• Currently working on universal POS system for global business use</li>
+                      <li>• Configured APIs and integrated third-party services for seamless functionality</li>
+                      <li>• Deployed applications using AWS S3 and Render for scalable hosting</li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
                       <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">React</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Next.js</Badge>
-                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30">TypeScript</Badge>
-                      <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Tailwind</Badge>
+                      <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">TypeScript</Badge>
+                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30">Next.js</Badge>
+                      <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">AWS S3</Badge>
+                      <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Render</Badge>
+                      <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">API Integration</Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -769,27 +809,30 @@ export default function FrontendPortfolio() {
                   <CardHeader>
                     <div className="flex justify-between items-start">
                       <div>
-                        <CardTitle className="text-xl mb-2">Frontend Developer</CardTitle>
-                        <CardDescription className="text-blue-400 font-medium">Digital Agency Pro</CardDescription>
+                        <CardTitle className="text-xl mb-2">Python Django Intern</CardTitle>
+                        <CardDescription className="text-blue-400 font-medium">Internship Program</CardDescription>
                       </div>
                       <Badge variant="outline" className="border-white/20 text-white">
-                        2021 - 2022
+                        Before Orionik
                       </Badge>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-gray-300 mb-4">
-                      <li>• Developed 15+ responsive websites for various clients</li>
-                      <li>• Integrated RESTful APIs and third-party services</li>
-                      <li>• Implemented modern CSS techniques and animations</li>
-                      <li>• Optimized websites for SEO and accessibility standards</li>
-                      <li>• Worked closely with designers to ensure design fidelity</li>
+                      <li>• Learned Python programming fundamentals and Django framework</li>
+                      <li>• Gained comprehensive knowledge of Model-View-Controller (MVC) architecture</li>
+                      <li>• Built web applications using Django's built-in features and ORM</li>
+                      <li>• Understood database relationships and backend development concepts</li>
+                      <li>• Practiced creating RESTful APIs and handling HTTP requests</li>
+                      <li>• Developed foundation skills that enhanced my full-stack understanding</li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Vue.js</Badge>
-                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30">SASS</Badge>
-                      <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">JavaScript</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Webpack</Badge>
+                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30">Python</Badge>
+                      <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">Django</Badge>
+                      <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">MVC</Badge>
+                      <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">ORM</Badge>
+                      <Badge className="bg-red-500/20 text-red-300 border-red-500/30">REST API</Badge>
+                      <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">PostgreSQL</Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -798,27 +841,29 @@ export default function FrontendPortfolio() {
                   <CardHeader>
                     <div className="flex justify-between items-start">
                       <div>
-                        <CardTitle className="text-xl mb-2">Junior Frontend Developer</CardTitle>
-                        <CardDescription className="text-blue-400 font-medium">StartupXYZ</CardDescription>
+                        <CardTitle className="text-xl mb-2">Self-Learning Journey</CardTitle>
+                        <CardDescription className="text-blue-400 font-medium">Personal Development</CardDescription>
                       </div>
                       <Badge variant="outline" className="border-white/20 text-white">
-                        2020 - 2021
-                      </Badge>
+                        1 Year              </Badge>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-gray-300 mb-4">
-                      <li>• Built responsive landing pages and marketing websites</li>
-                      <li>• Learned modern JavaScript frameworks and best practices</li>
-                      <li>• Participated in code reviews and agile development processes</li>
-                      <li>• Contributed to component library and design system</li>
-                      <li>• Fixed bugs and implemented new features based on user feedback</li>
+                      <li>• Started with HTML, CSS, and JavaScript fundamentals</li>
+                      <li>• Built personal projects including Student Attendance System (PHP)</li>
+                      <li>• Developed Online Grocery Store using .NET and Bootstrap</li>
+                      <li>• Transitioned to modern React development and component-based architecture</li>
+                      <li>• Practiced responsive design and modern CSS frameworks</li>
+                      <li>• Continuously learning new technologies and best practices</li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">HTML/CSS</Badge>
-                      <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">JavaScript</Badge>
+                      <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">HTML/CSS</Badge>
+                      <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">JavaScript</Badge>
+                      <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">PHP</Badge>
+                      <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">.NET</Badge>
                       <Badge className="bg-green-500/20 text-green-300 border-green-500/30">Bootstrap</Badge>
-                      <Badge className="bg-red-500/20 text-red-300 border-red-500/30">jQuery</Badge>
+                      <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Self-Taught</Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -826,7 +871,6 @@ export default function FrontendPortfolio() {
             </div>
           </section>
         )}
-
         {/* Contact Section */}
         {activeSection === "contact" && (
           <section className="min-h-screen p-8 flex items-center">
@@ -850,7 +894,7 @@ export default function FrontendPortfolio() {
                       </div>
                       <div>
                         <p className="font-semibold">Email</p>
-                        <p className="text-gray-400">your.email@example.com</p>
+                        <p className="text-gray-400">tdharmistha1417@gmail.com</p>
                       </div>
                     </div>
 
@@ -860,7 +904,7 @@ export default function FrontendPortfolio() {
                       </div>
                       <div>
                         <p className="font-semibold">GitHub</p>
-                        <p className="text-gray-400">github.com/yourusername</p>
+                        <p className="text-gray-400">https://github.com/Dharmistha9095</p>
                       </div>
                     </div>
 
@@ -870,7 +914,9 @@ export default function FrontendPortfolio() {
                       </div>
                       <div>
                         <p className="font-semibold">LinkedIn</p>
-                        <p className="text-gray-400">linkedin.com/in/yourprofile</p>
+                        <p className="text-gray-400">www.linkedin.com/in/dharmistha1726
+
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -898,41 +944,58 @@ export default function FrontendPortfolio() {
                   </div>
                 </div>
 
-                <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
-                  <CardHeader>
-                    <CardTitle className="text-xl">Send me a message</CardTitle>
-                    <CardDescription className="text-gray-400">I'll get back to you within 24 hours</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <Input
-                        placeholder="First Name"
-                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                      />
-                      <Input
-                        placeholder="Last Name"
-                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                      />
-                    </div>
-                    <Input
-                      placeholder="Email"
-                      type="email"
-                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                    />
-                    <Input
-                      placeholder="Project Type (e.g., React App, Landing Page)"
-                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                    />
-                    <Textarea
-                      placeholder="Tell me about your project..."
-                      rows={5}
-                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                    />
-                    <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0">
-                      Send Message
-                    </Button>
-                  </CardContent>
-                </Card>
+                 <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
+      <form ref={form} onSubmit={sendEmail}>
+        <CardHeader>
+          <CardTitle className="text-xl">Send me a message</CardTitle>
+          <CardDescription className="text-gray-400">
+            I'll get back to you within 24 hours
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <Input
+              name="first_name"
+              placeholder="First Name"
+              className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+              required
+            />
+            <Input
+              name="last_name"
+              placeholder="Last Name"
+              className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+              required
+            />
+          </div>
+          <Input
+            name="email"
+            type="email"
+            placeholder="Email"
+            className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+            required
+          />
+          <Input
+            name="project_type"
+            placeholder="Project Type (e.g., React App, Landing Page)"
+            className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+          />
+          <Textarea
+            name="message"
+            placeholder="Tell me about your project..."
+            rows={5}
+            className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+            required
+          />
+          <Button
+            type="submit"
+            className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0"
+          >
+            Send Message
+          </Button>
+        </CardContent>
+      </form>
+    </Card>
               </div>
             </div>
           </section>
@@ -944,6 +1007,9 @@ export default function FrontendPortfolio() {
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
       </div>
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+
     </div>
   )
+  
 }
