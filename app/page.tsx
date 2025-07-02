@@ -148,16 +148,6 @@ export default function FrontendPortfolio() {
     { name: "Responsive Design", level: 85, color: "from-purple-500 to-indigo-500" },
     { name: "Git/GitHub", level: 80, color: "from-gray-500 to-slate-500" },
   ]
-<<<<<<< Updated upstream
-  const downloadResume = () => {
-    const link = document.createElement("a")
-    link.href = "/DharmishthaResume.pdf"
-    link.download = "Dharmishtha.pdf" // Replace with your actual name
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-=======
 
   const themeClasses = isDark
     ? "bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white"
@@ -167,7 +157,6 @@ export default function FrontendPortfolio() {
     ? "bg-white/5 backdrop-blur-sm border-white/10 text-white"
     : "bg-white/80 backdrop-blur-sm border-gray-200 text-gray-900"
 
->>>>>>> Stashed changes
   return (
     <div className={`min-h-screen transition-all duration-500 ${themeClasses}`}>
       {/* Fixed Navigation Header */}
