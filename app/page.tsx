@@ -55,8 +55,8 @@ export default function FrontendPortfolio() {
 
     return () => clearInterval(timer)
   }, [currentRole])
-const form = useRef<any>(null);
-  const sendEmail = (e:any) => {
+  const form = useRef<any>(null);
+  const sendEmail = (e: any) => {
     debugger
     e.preventDefault();
 
@@ -68,15 +68,15 @@ const form = useRef<any>(null);
         "7jMSReY0I9a23lCLH"       // Replace with your public key
       )
       .then(
-      (result) => {
-        console.log(result.text);
-        toast.success("Message sent successfully!");
-      },
-      (error) => {
-        console.log(error.text);
-        toast.error("Failed to send message. Try again.");
-      }
-    );
+        (result) => {
+          console.log(result.text);
+          toast.success("Message sent successfully!");
+        },
+        (error) => {
+          console.log(error.text);
+          toast.error("Failed to send message. Try again.");
+        }
+      );
   };
   const sections = [
     { id: "home", label: "Home", icon: "🏠" },
@@ -97,16 +97,16 @@ const form = useRef<any>(null);
     { name: "Responsive Design", level: 85, color: "from-purple-500 to-indigo-500" },
     { name: "Git/GitHub", level: 80, color: "from-gray-500 to-slate-500" },
   ]
-const downloadResume = () => {
-  const link = document.createElement("a")
-  link.href = "/Dharmishtha.pdf"
-  link.download = "Dharmishtha.pdf" // Replace with your actual name
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
-}
+  const downloadResume = () => {
+    const link = document.createElement("a")
+    link.href = "/Dharmishtha.pdf"
+    link.download = "Dharmishtha.pdf" // Replace with your actual name
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
   return (
-    
+
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
       {/* Mobile Menu Button */}
       <button
@@ -133,18 +133,22 @@ const downloadResume = () => {
             <div className="flex justify-center space-x-3 mt-4">
               <a
                 href="https://github.com/Dharmistha9095"
+                target="_blank"
                 className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
               >
                 <Github className="w-4 h-4" />
               </a>
               <a
                 href="https://www.linkedin.com/in/dharmistha1726/"
+                target="_blank"
                 className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
+
                 href="mailto:tdharmistha1417@gmail.com"
+
                 className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
               >
                 <Mail className="w-4 h-4" />
@@ -172,12 +176,12 @@ const downloadResume = () => {
             ))}
           </div>
 
-            {/* Download CV Button */}
+          {/* Download CV Button */}
           <div className="mt-12">
             <Button
               onClick={downloadResume}
               className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600  text-white border-0"
-             >
+            >
               <Download className="w-4 h-4 mr-2" />
               Download Resume
             </Button>
@@ -286,7 +290,7 @@ const downloadResume = () => {
                           </div>
                           <div className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
                             <span className="text-gray-300">Company</span>
-                            <span className="text-cyan-400 font-medium">Tech Solutions</span>
+                            <span className="text-cyan-400 font-medium">Orionik Technologies</span>
                           </div>
                           <div className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
                             <span className="text-gray-300">Status</span>
@@ -342,7 +346,7 @@ const downloadResume = () => {
                           <Users className="w-5 h-5 text-cyan-400" />
                         </div>
                         <div>
-                          <div className="text-2xl font-bold text-white">3+</div>
+                          <div className="text-2xl font-bold text-white">20+</div>
                           <div className="text-cyan-400 text-sm">Team Collaborations</div>
                         </div>
                       </div>
@@ -494,7 +498,7 @@ const downloadResume = () => {
                         "Vercel",
                         "Netlify",
                         "NPM/Yarn",
-                        "ESLint",
+                     
                         "Prettier",
                       ].map((tool, index) => (
                         <Badge key={index} className="bg-white/10 text-white border-white/20 px-3 py-1">
@@ -883,18 +887,24 @@ const downloadResume = () => {
                 <div>
                   <h3 className="text-2xl font-bold mb-6">Ready for your next project?</h3>
                   <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                    I'm currently available for freelance projects and full-time opportunities. Let's discuss how I can
-                    help bring your frontend vision to life!
+                    I’m currently open to full-time opportunities where I can apply my frontend development skills to create intuitive and impactful user interfaces.
+                     Let’s connect and explore how I can contribute to your team!
                   </p>
 
-                  <div className="space-y-6">
+
+                  <div className="space-y-6 mt-6">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
                         <Mail className="w-6 h-6" />
                       </div>
                       <div>
                         <p className="font-semibold">Email</p>
-                        <p className="text-gray-400">tdharmistha1417@gmail.com</p>
+                        <a
+                          href="mailto:tdharmistha1417@gmail.com"
+                          className="text-gray-400 hover:underline"
+                        >
+                          tdharmistha1417@gmail.com
+                        </a>
                       </div>
                     </div>
 
@@ -904,7 +914,14 @@ const downloadResume = () => {
                       </div>
                       <div>
                         <p className="font-semibold">GitHub</p>
-                        <p className="text-gray-400">https://github.com/Dharmistha9095</p>
+                        <a
+                          href="https://github.com/Dharmistha9095"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:underline"
+                        >
+                          github.com/Dharmistha9095
+                        </a>
                       </div>
                     </div>
 
@@ -914,9 +931,14 @@ const downloadResume = () => {
                       </div>
                       <div>
                         <p className="font-semibold">LinkedIn</p>
-                        <p className="text-gray-400">www.linkedin.com/in/dharmistha1726
-
-                        </p>
+                        <a
+                          href="https://www.linkedin.com/in/dharmistha1726/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:underline"
+                        >
+                          linkedin.com/in/dharmistha1726
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -944,58 +966,58 @@ const downloadResume = () => {
                   </div>
                 </div>
 
-                 <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
-      <form ref={form} onSubmit={sendEmail}>
-        <CardHeader>
-          <CardTitle className="text-xl">Send me a message</CardTitle>
-          <CardDescription className="text-gray-400">
-            I'll get back to you within 24 hours
-          </CardDescription>
-        </CardHeader>
+                <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
+                  <form ref={form} onSubmit={sendEmail}>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Send me a message</CardTitle>
+                      <CardDescription className="text-gray-400">
+                        I'll get back to you within 24 hours
+                      </CardDescription>
+                    </CardHeader>
 
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              name="first_name"
-              placeholder="First Name"
-              className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-              required
-            />
-            <Input
-              name="last_name"
-              placeholder="Last Name"
-              className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-              required
-            />
-          </div>
-          <Input
-            name="email"
-            type="email"
-            placeholder="Email"
-            className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-            required
-          />
-          <Input
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <Input
+                          name="first_name"
+                          placeholder="First Name"
+                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+                          required
+                        />
+                        <Input
+                          name="last_name"
+                          placeholder="Last Name"
+                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+                          required
+                        />
+                      </div>
+                      <Input
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+                        required
+                      />
+                      {/* <Input
             name="project_type"
             placeholder="Project Type (e.g., React App, Landing Page)"
             className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-          />
-          <Textarea
-            name="message"
-            placeholder="Tell me about your project..."
-            rows={5}
-            className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-            required
-          />
-          <Button
-            type="submit"
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0"
-          >
-            Send Message
-          </Button>
-        </CardContent>
-      </form>
-    </Card>
+          /> */}
+                      <Textarea
+                        name="message"
+                        placeholder="Tell me about your project..."
+                        rows={5}
+                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+                        required
+                      />
+                      <Button
+                        type="submit"
+                        className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0"
+                      >
+                        Send Message
+                      </Button>
+                    </CardContent>
+                  </form>
+                </Card>
               </div>
             </div>
           </section>
@@ -1007,9 +1029,9 @@ const downloadResume = () => {
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
       </div>
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
 
     </div>
   )
-  
+
 }
